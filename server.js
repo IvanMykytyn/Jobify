@@ -35,22 +35,27 @@ if (process.env.NODE_ENV !== 'production') {
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 // only when ready to deploy
-// app.use(express.static(path.resolve(__dirname, './client/build')))
+// set static assets
+app.use(express.static(path.resolve(__dirname, './client/build')))
 
 // to recognize the incoming request Object as a JSON Object
 app.use(express.json())
+ 
 
+// helmet Helmet helps you secure your Express apps by setting various HTTP headers.
 app.use(helmet())
+// xss-clean Node.js Connect middleware to sanitize user input coming from POST body, GET queries, and url params.
 app.use(xss())
+// express-mongo-sanitize Sanitizes user-supplied data to prevent MongoDB Operator Injection.
 app.use(mongoSanitize())
 
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/jobs', authenticateUser, jobsRouter)
 
 // only when ready to deploy
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, './client/build', 'index.html'))
-// })
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/build', 'index.html'))
+})   
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
