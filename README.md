@@ -4,7 +4,14 @@
 
 Project in Action - [Jobify](https://your-jobify.herokuapp.com/)
 
-An app where you can track your job search activity, have all these vacancies at one place, and conveniently view the statistics.
+An app propose a useful solution for managing your career progression. Jobify is a place where you can store your vacancies and view statistics about them.
+
+## App capabilities
+
+- view stats
+- view all your jobs
+- add and update jobs
+- change profile information
 
 An app I created due to Udemy course by [John Smilga](https://github.com/john-smilga).
 
@@ -37,7 +44,7 @@ An app I created due to Udemy course by [John Smilga](https://github.com/john-sm
 ### Run The App Locally
 
 > you need to install [nodemon](https://www.npmjs.com/package/nodemon) for this to work.
-> 
+
 ```sh
 npm run install-dependencies
 ```
