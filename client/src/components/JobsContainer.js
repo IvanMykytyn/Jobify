@@ -4,6 +4,7 @@ import Loading from './Loading'
 import Job from './Job'
 import Wrapper from '../assets/wrappers/JobsContainer'
 import PageBtnContainer from './PageBtnContainer'
+import { debounce } from 'lodash'
 
 const JobsContainer = () => {
   const {
@@ -18,9 +19,13 @@ const JobsContainer = () => {
     sort,
     numOfPages,
   } = useAppContext()
-  
+
+  // debounce getJobs function
+  const debouncedGetJobs = debounce(getJobs, 750)
+
   useEffect(() => {
-    getJobs()
+    debouncedGetJobs()
+
     // eslint-disable-next-line
   }, [page, search, searchStatus, searchType, sort])
 
@@ -41,7 +46,7 @@ const JobsContainer = () => {
       <h5>
         {totalJobs} job{jobs.length > 1 && 's'} found
       </h5>
-      <div className='jobs'>
+      <div className="jobs">
         {jobs.map((job) => {
           return <Job key={job._id} {...job} />
         })}
